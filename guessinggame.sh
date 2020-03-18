@@ -3,10 +3,16 @@
 
 function guessing_game()
 {
-local count=$(ls | wc -l)
+local count=$(ls | grep ^- | ls -l)
+
 while  true;
 do
  read -p "Enter your guess :" mg
+if ! [[ $mg =~ ^[0-9]+$ ]]
+then
+continue;
+fi
+
  if [[ $mg -lt $count ]]
  then
     echo "guessed num  LESSER than true num"
